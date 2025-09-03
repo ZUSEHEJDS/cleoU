@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glas‑Optik Deluxe</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* schöner Hintergrundgradient */
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: sans-serif;
+    }
+
+    .glass {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      /* kräftiger Glass‑Effekt */
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      /* Tiefe durch Schatten innen und außen */
+      box-shadow:
+        inset 0 0 40px rgba(255, 255, 255, 0.2),
+        0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* sanfte Skalierung beim Hover */
+    .glass:hover {
+      transform: scale(1.05);
+    }
+
+    /* gleitende Licht‑Reflektion */
+    .glass::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.1) 20%,
+        transparent 60%
+      );
+      transform: translateX(-100%) translateY(-100%) rotate(25deg);
+      transition: transform 1.2s ease-in-out;
+      pointer-events: none;
+    }
+    .glass:hover::before {
+      transform: translateX(100%) translateY(100%) rotate(25deg);
+    }
+
+    /* leichter Noise‑Effekt für realistischere Oberfläche */
+    .glass::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NMjIz8DwADnQHIfS4uAAAAAElFTkSuQmCC') repeat;
+      opacity: 0.02;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 24px;
+    }
+    .content h1 {
+      margin-top: 60px;
+      font-size: 2.2rem;
+    }
+    .content p {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass">
+    <div class="content">
+      <h1>Frosted Glass</h1>
+      <p>Fahre mit der Maus darüber für den Reflexions‑Sweep</p>
+    </div>
+  </div>
+
+</body>
+</html>
